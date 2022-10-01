@@ -50,7 +50,7 @@ export const NextPageButton = () => {
         <path
           d="M0.400024 9.13635H17.6M17.6 9.13635L12.1534 1.70908M17.6 9.13635L12.1534 16.5636"
           stroke="white"
-          stroke-width="3"
+          strokeWidth="3"
         />
       </svg>
     </ContainerButton>
@@ -70,7 +70,7 @@ export const BackPageButton = () => {
         <path
           d="M19.9454 9.13636L2.74543 9.13636M2.74543 9.13636L8.1921 16.5636M2.74543 9.13636L8.1921 1.70908"
           stroke="white"
-          stroke-width="3"
+          strokeWidth="3"
         />
       </svg>
     </ContainerButton>

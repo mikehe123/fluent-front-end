@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router";
 import { useRecoilState } from "recoil";
 // import { StoryState } from "../../Model/Story";
@@ -17,6 +18,7 @@ const Page = () => {
       <Routes>
         {/* <Route index element={<LoadingPage />} /> */}
         <Route index element={<StoryPage />} />
+
         <Route path="quiz" element={<QuizPage />} />
       </Routes>
     </S.Container>
@@ -43,6 +45,31 @@ const QuizPage = () => {
 
 const StoryPage = () => {
   // const [story, setStory] = useRecoilState(StoryState);
+
+  const example = async () => {
+    const rawResponse = await fetch("http://127.0.0.1:5000/story/new", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        initial_prompt: "Joe the girafee",
+        reading_level: "2nd grade",
+      }),
+    });
+    const content = await rawResponse.json();
+
+    // if (content.hasOwnProperty("json")) {
+    //   console.log("response is: ");
+    // } else {
+    //   console.log("error in fetching");
+    // }
+    console.log("this is the content", content);
+  };
+  useEffect(() => {
+    example();
+  }, []);
 
   return (
     <S.ContainerStory>

@@ -15,6 +15,8 @@ const NextActionDefault: NextActionType = {
   PageType: QUIZPAGE,
 };
 
+type StoryResponse = {};
+
 // const MockStory = [];
 // export const StoryState = atom({
 //   key: "StoryAtom",
