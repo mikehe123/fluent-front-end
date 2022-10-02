@@ -14,6 +14,8 @@ export const ContainerQuiz = styled.div`
   padding-top: 60px;
 `;
 
+export const VeritcalSpacer = styled.div``;
+
 export const ContainerOption = styled.div`
   display: flex;
   align-items: flex-start;
