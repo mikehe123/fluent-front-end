@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { CurrentStoryState } from "../../Model/Story.ts";
+import { CurrentStoryState, ForwardPauseState } from "../../Model/Story.ts";
 
 export const QuizOptionForm = () => {
   const [selectedResponse, setSelectedResponse] = useState(null);
@@ -55,11 +55,13 @@ export const QuizOptionForm = () => {
 };
 
 export const StoryOption = (props) => {
+  const [forwardPause, setForwardPause] = useRecoilState(ForwardPauseState);
   return (
     <OptionContainer
       correctResponse={props.correctResponse}
       incorrectResponse={props.incorrectResponse}
       onClick={() => {
+        setForwardPause(false);
         props.selectQuizOption(props.id);
       }}
     >
@@ -82,12 +84,15 @@ export const StoryOption = (props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-content: center;
 `;
 
 const OptionContainer = styled.div`
   margin-top: 28px;
-  width: 419px;
-  height: 80px;
+  min-width: 160px;
+  max-width: 500px;
+  min-height: 60px;
+  margin-left: 10px;
 
   background: #ffffff;
   border: 3px solid #eaeaea;
@@ -117,8 +122,8 @@ const OptionContainer = styled.div`
 const OptionSelectBox = styled.div`
   font-family: "Public Sans";
   font-weight: 500;
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border: 3px solid #eaeaea;
   border-radius: 5px;
   margin: 16px;
@@ -143,6 +148,7 @@ const OptionSelectBox = styled.div`
 `;
 
 const OptionText = styled.div`
+  padding-right: 20px;
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 500;
@@ -167,7 +173,7 @@ const StoryOptionQuestion = styled.div`
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 36px;
   line-height: 38px;
 
   color: #6f6f6f;

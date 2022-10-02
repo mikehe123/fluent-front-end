@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StoryTexts = ({ storyText }) => {
   return (
     <Container>
-      <Text>{storyText}</Text>
+      <Text>{"     " + storyText}</Text>
     </Container>
   );
 };
@@ -19,7 +19,7 @@ export const Text = styled.div`
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 24px;
+  line-height: 34px;
   color: #606060;
 `;

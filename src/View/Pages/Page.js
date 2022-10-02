@@ -6,6 +6,8 @@ import {
   NextActionState,
   OPTIONPAGE,
   QUIZPAGE,
+  StoryHistoryState,
+  ForwardPauseState,
 } from "../../Model/Story.ts";
 import { Loading } from "../Components/Loading";
 import { PageFlippers } from "../Components/PageFlipButton";
@@ -36,7 +38,6 @@ const StartingPage = () => {
   return (
     <S.ContainerLoading>
       <StartingMenu />
-      <PageFlippers />
     </S.ContainerLoading>
   );
 };
@@ -50,6 +51,10 @@ const LoadingPage = () => {
 };
 
 const OptionPage = () => {
+  const [forwardPause, setForwardPause] = useRecoilState(ForwardPauseState);
+  useEffect(() => {
+    setForwardPause(true);
+  }, []);
   return (
     <S.ContainerOption>
       <StoryCard />
@@ -61,11 +66,13 @@ const OptionPage = () => {
 
 const QuizPage = () => {
   const story = useRecoilValue(CurrentStoryState);
+  const [forwardPause, setForwardPause] = useRecoilState(ForwardPauseState);
   console.log(story);
 
   const [nextAction, setNextAction] = useRecoilState(NextActionState);
 
   useEffect(() => {
+    setForwardPause(true);
     setNextAction({ PageType: OPTIONPAGE });
   }, []);
 
@@ -81,13 +88,29 @@ const QuizPage = () => {
 const StoryPage = () => {
   const story = useRecoilValue(CurrentStoryState);
   const [nextAction, setNextAction] = useRecoilState(NextActionState);
+  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
+  const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
 
   useEffect(() => {
+    const newHistory = [...historyStory];
+    newHistory.push(story);
+
+    if (
+      currentStory.story_part_id !== historyStory.length - 1 &&
+      historyStory.length > 1
+    ) {
+      console.log("error ahead");
+    }
+
     if (story.hasOwnProperty("quiz")) {
       setNextAction({ PageType: QUIZPAGE });
     } else {
       setNextAction({ PageType: OPTIONPAGE });
     }
+
+    setHistoryStory([...newHistory]);
+    console.log("for history");
+    console.log(historyStory);
   }, []);
 
   return (

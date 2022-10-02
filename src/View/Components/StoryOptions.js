@@ -6,6 +6,7 @@ import {
   OPTIONPAGE,
   STORYPAGE,
   LoadingState,
+  ForwardPauseState,
 } from "../../Model/Story.ts";
 import { CurrentStoryState } from "../../Model/Story.ts";
 import { Loading } from "./Loading";
@@ -15,13 +16,14 @@ export const StoryOptionForm = () => {
   const storyId = story.story_id;
   const [loading, setLoading] = useRecoilState(LoadingState);
   const [selected, setSelected] = useState(null);
-
+  const [forwardPause, setForwardPause] = useRecoilState(ForwardPauseState);
   const [previousAction, setNextAction] = useRecoilState(NextActionState);
 
   const registerNextAction = (selectedOption) => () => {
     setNextAction({ PageType: STORYPAGE, selectedOption, storyId });
     setSelected(selectedOption);
     // console.log(selected, " show me selected");
+    setForwardPause(false);
   };
 
   if (loading) {

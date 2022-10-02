@@ -62,7 +62,12 @@ export const StoryHistoryState = atom({
   default: [],
 });
 
-export const OldStoryState = atom({
-  key: "OldStoryStateAtom",
-  default: {},
+export const StoryPartState = atom({
+  key: "StoryPartStateAtom",
+  default: -1,
+});
+
+export const ForwardPauseState = atom({
+  key: "FowardPauseStateAtom",
+  default: false,
 });

@@ -9,14 +9,21 @@ import {
   LoadingState,
   CurrentStoryState,
   StoryHistoryState,
-  OldStoryState,
+  StoryPartState,
+  ForwardPauseState,
 } from "../../Model/Story.ts";
+
+import { useLocation } from "react-router-dom";
+
 import ContinPrompt from "../../Controllers/ContinPrompt";
 
 export const PageFlippers = () => {
+  const [storyPart, setStoryPart] = useRecoilState(StoryPartState);
+  const backIsOn = storyPart > 1;
+  console.log(storyPart, "from flipper");
   return (
     <Container>
-      <BackPageButton />
+      {/* {backIsOn && <BackPageButton />} */}
       <NextPageButton />
     </Container>
   );
@@ -25,12 +32,41 @@ export const PageFlippers = () => {
 export const NextPageButton = () => {
   const nextAction = useRecoilValue(NextActionState);
   const [loading, setLoading] = useRecoilState(LoadingState);
+  const [storyPart, setStoryPart] = useRecoilState(StoryPartState);
   const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
-  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
+  const historyStory = useRecoilValue(StoryHistoryState);
+  const [forwardPause, setForwardPause] = useRecoilState(ForwardPauseState);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = async () => {
-    console.log(nextAction);
+    console.log("checking forward pause state", forwardPause);
+    if (
+      (location.pathname.includes("quiz") ||
+        location.pathname.includes("option")) &&
+      forwardPause
+    ) {
+      return;
+    }
+
+    if (currentStory.story_part_id == historyStory.length - 1) {
+      console.log(
+        "update the newest part",
+        currentStory.story_part_id,
+        historyStory.length - 1
+      );
+      setStoryPart(historyStory.length);
+    } else {
+      // console.log(
+      //   "not update newest part",
+      //   currentStory.story_part_id,
+      //   historyStory.length - 1
+      // );
+      setCurrentStory({ ...historyStory[storyPart] });
+
+      setStoryPart(storyPart + 1);
+    }
+
     switch (nextAction.PageType) {
       case STORYPAGE:
         setLoading(true);
@@ -40,9 +76,6 @@ export const NextPageButton = () => {
         );
 
         if (storyContinue) {
-          setHistoryStory([...historyStory, currentStory]);
-          console.log("for history");
-          console.log(historyStory);
           setCurrentStory(storyContinue);
           setLoading(false);
           navigate("../story");
@@ -81,12 +114,27 @@ export const NextPageButton = () => {
 
 export const BackPageButton = () => {
   const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
-  // const [oldStory, setOldStory] = useRecoilState(OldStoryState);
+  const [storyPart, setStoryPart] = useRecoilState(StoryPartState);
   const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  console.log(historyStory);
+  console.log("change back:  ", storyPart, currentStory);
   const handleClick = () => {
-    // setCurrentStory(historyStory[historyStory.length - 1]);
+    if (storyPart !== -1) {
+      setCurrentStory({ ...historyStory[storyPart - 1] });
+      setStoryPart(storyPart - 1);
+    } else {
+      setCurrentStory({ ...historyStory[historyStory.length - 2] });
+      setStoryPart(historyStory.length - 2);
+    }
+
+    if (
+      location.pathname.includes("quiz") ||
+      location.pathname.includes("option")
+    ) {
+      navigate("../story");
+    }
   };
   return (
     <ContainerButton onClick={handleClick}>
@@ -112,7 +160,7 @@ const Container = styled.div`
   right: 60px;
   bottom: 40px;
   display: flex;
-  width: 160px;
+  width: 77px;
   height: 77px;
   border: 2px solid #e0e0e0;
   border-radius: 100px;

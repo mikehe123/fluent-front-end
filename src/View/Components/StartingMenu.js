@@ -30,13 +30,12 @@ const Level = ({ experience }) => {
   const [loading, setLoading] = useRecoilState(LoadingState);
   const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
 
-  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
   const handleClick = async () => {
     setLoading(true);
     const initalResponse = await InitPrompt("2nd grade");
     if (initalResponse) {
       setCurrentStory(initalResponse);
-      setHistoryStory([...historyStory, initalResponse]);
+
       setLoading(false);
       // console.log(initalResponse);
       navigate("story");
@@ -44,7 +43,6 @@ const Level = ({ experience }) => {
     }
   };
 
-  console.log(historyStory, "histroy from staring page");
   // console.log("new history", currentStory);
 
   return <LevelContainer onClick={handleClick}>{experience}</LevelContainer>;

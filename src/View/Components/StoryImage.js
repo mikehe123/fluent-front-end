@@ -15,6 +15,8 @@ export const Container = styled.div`
   padding: 0 30px 0 30px;
 `;
 export const Image = styled.img`
-  width: 420px;
-  height: 420;
+  max-width: 420px;
+  max-height: 420px;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 4px 4px 8px #929292;
 `;
