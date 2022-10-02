@@ -92,16 +92,8 @@ const StoryPage = () => {
   const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
 
   useEffect(() => {
-    const newHistory = [...historyStory];
-    newHistory.push(story);
-
-    if (
-      currentStory.story_part_id !== historyStory.length - 1 &&
-      historyStory.length > 1
-    ) {
-      console.log("error ahead");
-    }
-
+    console.log("printing the newest story");
+    console.log(story);
     if (story.hasOwnProperty("quiz")) {
       setNextAction({ PageType: QUIZPAGE });
     } else {
