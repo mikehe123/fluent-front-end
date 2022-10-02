@@ -1,4 +1,4 @@
-export default async function InitPrompt(readingLevel) {
+export default async function InitPrompt(prompt) {
   const rawResponse = await fetch("http://127.0.0.1:5000/story/new", {
     method: "POST",
     headers: {
@@ -6,8 +6,8 @@ export default async function InitPrompt(readingLevel) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      initial_prompt: "puppy",
-      reading_level: readingLevel,
+      initial_prompt: prompt,
+      reading_level: "",
     }),
   });
   const content = await rawResponse.json();

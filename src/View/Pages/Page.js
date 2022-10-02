@@ -36,7 +36,6 @@ const StartingPage = () => {
   return (
     <S.ContainerLoading>
       <StartingMenu />
-      <PageFlippers />
     </S.ContainerLoading>
   );
 };
@@ -72,7 +71,7 @@ const QuizPage = () => {
   return (
     <S.ContainerQuiz>
       <StoryCard />
-      {/* <QuizOptionForm /> */}
+      <QuizOptionForm />
       <PageFlippers />
     </S.ContainerQuiz>
   );
@@ -83,6 +82,8 @@ const StoryPage = () => {
   const [nextAction, setNextAction] = useRecoilState(NextActionState);
 
   useEffect(() => {
+    console.log("printing the newest story")
+    console.log(story)
     if (story.hasOwnProperty("quiz")) {
       setNextAction({ PageType: QUIZPAGE });
     } else {

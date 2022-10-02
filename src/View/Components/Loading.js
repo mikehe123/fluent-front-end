@@ -4,7 +4,8 @@ export const Loading = () => {
   return (
     <Container>
       <ContainerImage>
-        <Image src={require("../../Assets/loading.png")} />
+        <Image src={require("../../Assets/cute.gif")} />
+        <LoadingText>Adding the magic...</LoadingText>
       </ContainerImage>
     </Container>
   );
@@ -31,6 +32,12 @@ const ContainerImage = styled.div`
   border-radius: 19px;
   align-items: center;
   justify-content: center;
+  flex-direction:column;
+`;
+
+const LoadingText = styled.div`
+  font-family: "Public Sans";
+  font-weight: 500;
 `;
 
 const Image = styled.img`
@@ -38,4 +45,5 @@ const Image = styled.img`
   height: 104px;
   left: 588px;
   top: 342px;
+  margin-bottom: 10px;
 `;
