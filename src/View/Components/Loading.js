@@ -34,6 +34,19 @@ const ContainerImage = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  animation-name: my-animation;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+
+  @keyframes my-animation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 const LoadingText = styled.div`
