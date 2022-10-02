@@ -37,28 +37,35 @@ export const StoryOptionForm = () => {
         onClick={registerNextAction(0)}
         selected={selected === 0}
         optionText={story.next_options[0]}
+        option={1}
       />
       <StoryOption
         onClick={registerNextAction(1)}
         selected={selected === 1}
         optionText={story.next_options[1]}
+        option={2}
       />
     </Container>
   );
 };
 
 export const StoryOption = (props) => {
-  const { optionText, selected } = props;
+  const { optionText, selected, option } = props;
   return (
     <OptionContainer {...props} selected={selected}>
-      <OptionSelectBox />
-      <OptionText>{optionText}</OptionText>
+      <OptionSelectBox selected={selected}>
+        <OptionTextSelected selected={selected}>{option}</OptionTextSelected>
+      </OptionSelectBox>
+      <OptionText selected={selected}>{optionText}</OptionText>
     </OptionContainer>
   );
 };
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 50vw;
+  justify-content: center;
+  padding-left: 60px;
 `;
 
 const OptionContainer = styled.div`
@@ -66,9 +73,11 @@ const OptionContainer = styled.div`
   width: 419px;
   height: 80px;
 
-  background-color: ${(props) => (props.selected ? "#606060" : "#ffffff")};
-  border: 3px solid #eaeaea;
-  box-shadow: 0px 4px 0px #eaeaea;
+  background-color: ${(props) => (props.selected ? "#ddf4ff" : "#ffffff")};
+  border: ${(props) =>
+    props.selected ? "3px solid #1899d6;" : "3px solid #eaeaea"};
+  box-shadow: ${(props) =>
+    props.selected ? "#0px 4px 0px #1899d6" : "#0px 4px 0px #eaeaea"};
   border-radius: 10px;
 
   display: flex;
@@ -76,14 +85,28 @@ const OptionContainer = styled.div`
 `;
 
 const OptionSelectBox = styled.div`
-  width: 40px;
-  height: 40px;
-  border: 3px solid #eaeaea;
+  min-width: 30px;
+  min-height: 30px;
+  border: ${(props) =>
+    props.selected ? "3px solid #1899d6;" : "3px solid #eaeaea"};
   border-radius: 5px;
   margin: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const OptionTextSelected = styled.div`
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: ${(props) => (props.selected ? "#1899d6;" : "#eaeaea")};
 `;
 
 const OptionText = styled.div`
+  padding-right: 20px;
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 500;

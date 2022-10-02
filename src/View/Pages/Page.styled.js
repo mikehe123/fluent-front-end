@@ -10,15 +10,15 @@ export const Container = styled.div`
 export const ContainerQuiz = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: space-around;
-  padding: 60px 120px 0 120px;
+  justify-content: flex-start;
+  padding-top: 60px;
 `;
 
 export const ContainerOption = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: space-around;
-  padding: 60px 120px 0 120px;
+  justify-content: flex-start;
+  padding-top: 60px;
 `;
 
 export const ContainerLoading = styled.div`

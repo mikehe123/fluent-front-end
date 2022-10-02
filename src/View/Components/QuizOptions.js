@@ -48,8 +48,10 @@ export const QuizOptionForm = () => {
   return (
     <Container>
       <StoryOptionQuestion>{quiz.question}</StoryOptionQuestion>
-      {generate_option_cards()}
-      {responseMessage && <QuizResponse>{responseMessage}</QuizResponse>}
+      <StoryOptionWrapper>
+        {generate_option_cards()}
+        {responseMessage && <QuizResponse>{responseMessage}</QuizResponse>}
+      </StoryOptionWrapper>
     </Container>
   );
 };
@@ -85,12 +87,19 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
+
+  /* width: 50vw; */
 `;
 
+const StoryOptionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+`;
 const OptionContainer = styled.div`
   margin-top: 28px;
   min-width: 160px;
-  max-width: 500px;
+  max-width: 400px;
   min-height: 60px;
   margin-left: 10px;
 
@@ -122,8 +131,8 @@ const OptionContainer = styled.div`
 const OptionSelectBox = styled.div`
   font-family: "Public Sans";
   font-weight: 500;
-  min-width: 40px;
-  min-height: 40px;
+  min-width: 30px;
+  min-height: 30px;
   border: 3px solid #eaeaea;
   border-radius: 5px;
   margin: 16px;
@@ -173,8 +182,9 @@ const StoryOptionQuestion = styled.div`
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 38px;
+  max-width: 560px;
 
   color: #6f6f6f;
 
