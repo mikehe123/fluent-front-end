@@ -1,13 +1,9 @@
 import styled from "styled-components";
 
-export const StoryTexts = () => {
+export const StoryTexts = ({ storyText }) => {
   return (
     <Container>
-      <Text>
-        Once upon a time, a lion went to the city. He was very excited to see
-        all the sights and sounds. He walked around for a while, taking
-        everything in. Eventually, he got tired and decided to go home.
-      </Text>
+      <Text>{storyText}</Text>
     </Container>
   );
 };

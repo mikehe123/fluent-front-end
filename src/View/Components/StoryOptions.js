@@ -1,22 +1,56 @@
+import { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import {
+  NextActionState,
+  OPTIONPAGE,
+  STORYPAGE,
+  LoadingState,
+} from "../../Model/Story.ts";
+import { CurrentStoryState } from "../../Model/Story.ts";
+import { Loading } from "./Loading";
 
 export const StoryOptionForm = () => {
+  const story = useRecoilValue(CurrentStoryState);
+  const storyId = story.story_id;
+  const [loading, setLoading] = useRecoilState(LoadingState);
+  const [selected, setSelected] = useState(null);
+
+  const [previousAction, setNextAction] = useRecoilState(NextActionState);
+
+  const registerNextAction = (selectedOption) => () => {
+    setNextAction({ PageType: STORYPAGE, selectedOption, storyId });
+    setSelected(selectedOption);
+    // console.log(selected, " show me selected");
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Container>
       <StoryOptionQuestion>What should happen next?</StoryOptionQuestion>
-      {/* <OptionOne>The lion went home and slept for a while</OptionOne>
-      <OptionTwo> The lion went home and slept for a while </OptionTwo> */}
-      <StoryOption />
-      <StoryOption />
+      <StoryOption
+        onClick={registerNextAction(0)}
+        selected={selected === 0}
+        optionText={story.next_options[0]}
+      />
+      <StoryOption
+        onClick={registerNextAction(1)}
+        selected={selected === 1}
+        optionText={story.next_options[1]}
+      />
     </Container>
   );
 };
 
-export const StoryOption = () => {
+export const StoryOption = (props) => {
+  const { optionText, selected } = props;
   return (
-    <OptionContainer>
+    <OptionContainer {...props} selected={selected}>
       <OptionSelectBox />
-      <OptionText>The lion went home and slept for a while</OptionText>
+      <OptionText>{optionText}</OptionText>
     </OptionContainer>
   );
 };
@@ -30,7 +64,7 @@ const OptionContainer = styled.div`
   width: 419px;
   height: 80px;
 
-  background: #ffffff;
+  background-color: ${(props) => (props.selected ? "#606060" : "#ffffff")};
   border: 3px solid #eaeaea;
   box-shadow: 0px 4px 0px #eaeaea;
   border-radius: 10px;

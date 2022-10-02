@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   NextActionState,
   OPTIONPAGE,
   QUIZPAGE,
   STORYPAGE,
+  LoadingState,
+  CurrentStoryState,
+  StoryHistoryState,
 } from "../../Model/Story.ts";
+import ContinPrompt from "../../Controllers/ContinPrompt";
+
 export const PageFlippers = () => {
   return (
     <Container>
@@ -18,13 +23,27 @@ export const PageFlippers = () => {
 
 export const NextPageButton = () => {
   const nextAction = useRecoilValue(NextActionState);
-
+  const [loading, setLoading] = useRecoilState(LoadingState);
+  const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
+  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    console.log(nextAction);
     switch (nextAction.PageType) {
       case STORYPAGE:
-        navigate("../story");
+        setLoading(true);
+        const storyContinue = await ContinPrompt(
+          nextAction.storyId,
+          nextAction.selectedOption
+        );
+
+        if (storyContinue) {
+          setHistoryStory([...historyStory, currentStory]);
+          setCurrentStory(storyContinue);
+          setLoading(false);
+          navigate("../story");
+        }
         break;
       case QUIZPAGE:
         navigate("../quiz");

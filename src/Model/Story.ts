@@ -9,30 +9,41 @@ export const LOADINGPAGE = "loadingpage";
 
 type NextActionType = {
   PageType: String;
+  selectedOption?: Number;
+  storyId?: Number;
 };
 
 const NextActionDefault: NextActionType = {
-  PageType: QUIZPAGE,
+  PageType: OPTIONPAGE,
 };
 
-type StoryResponse = {};
+type StoryResponseType = {
+  story_part_id: Number | null;
+  text: String;
+  image_url: String[];
+  next_options: {
+    "0": String;
+    "1": String;
+  };
+  selected_option_id: Number | null;
+  story_id: Number;
+};
 
-// const MockStory = [];
-// export const StoryState = atom({
-//   key: "StoryAtom",
-//   default: MockStory,
-// });
-// const MockStoryPart = {
-//   pageType: STORYPAGE,
-//   pageText: "",
-//   pageImage: "",
-//   pageOption: [],
-//   pageCount: 0,
-// };
+const StoryResponseDefault: StoryResponseType = {
+  story_part_id: null,
+  text: "",
+  image_url: [""],
+  next_options: {
+    "0": "",
+    "1": "",
+  },
+  selected_option_id: null,
+  story_id: 0,
+};
 
-export const StoryState = atom({
+export const CurrentStoryState = atom({
   key: "StoryStateAtom",
-  default: {},
+  default: StoryResponseDefault,
 });
 
 export const NextActionState = atom({
@@ -43,6 +54,11 @@ export const NextActionState = atom({
 export const LoadingState = atom({
   key: "LoadingStateAtom",
   default: false,
+});
+
+export const StoryHistoryState = atom({
+  key: "StoryHistoryStateAtom",
+  default: [],
 });
 
 const CurrentStory = {

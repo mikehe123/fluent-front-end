@@ -1,14 +1,13 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { CurrentStoryState } from "../../Model/Story.ts";
 
 export const StoryCard = () => {
+  const story = useRecoilValue(CurrentStoryState);
   return (
     <Container>
-      <Image src={require("../../Assets/iex1.png")} />
-      <Text>
-        Once upon a time, a lion went to the city. He was very excited to see
-        all the sights and sounds. He walked around for a while, taking
-        everything in. Eventually, he got tired and decided to go home.
-      </Text>
+      <Image src={story.image_url[0]} />
+      <Text>{story.text}</Text>
     </Container>
   );
 };

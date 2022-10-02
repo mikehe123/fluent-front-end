@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { LoadingState } from "../../Model/Story.ts";
+import { LoadingState, CurrentStoryState } from "../../Model/Story.ts";
 import { Loading } from "./Loading";
 import InitPrompt from "../../Controllers/InitPrompt";
 
@@ -24,27 +24,18 @@ export const StartingMenu = () => {
 const Level = ({ experience }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useRecoilState(LoadingState);
+  const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setLoading(true);
+    const initalResponse = await InitPrompt("2nd grade");
+    if (initalResponse) {
+      setCurrentStory(initalResponse);
 
-    console.log("2 grade", InitPrompt("2nd grade"));
-
-    switch (experience) {
-      case "Beginner":
-        navigate("../story");
-        break;
-      case "Intermmediate":
-        InitPrompt("3nd grade");
-        navigate("../quiz");
-        break;
-      case "Hard":
-        InitPrompt("4nd grade");
-        navigate("../option");
-        break;
-      default:
-        console.log("Switch error at menu");
-        navigate("");
+      setLoading(false);
+      // console.log(initalResponse);
+      navigate("story");
+      // console.log("startingpage init success", initalResponse);
     }
   };
 

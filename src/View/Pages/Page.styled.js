@@ -6,11 +6,19 @@ export const Container = styled.div`
   height: 100vh;
   width: 100vw;
 `;
+
 export const ContainerQuiz = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-  padding: 120px 120px 0 120px;
+  padding: 60px 120px 0 120px;
+`;
+
+export const ContainerOption = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  padding: 60px 120px 0 120px;
 `;
 
 export const ContainerLoading = styled.div`

@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router";
-import { useRecoilState } from "recoil";
-import { StoryState } from "../../Model/Story.ts";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  CurrentStoryState,
+  NextActionState,
+  OPTIONPAGE,
+} from "../../Model/Story.ts";
 import { Loading } from "../Components/Loading";
 import { PageFlippers } from "../Components/PageFlipButton";
 import { StartingMenu } from "../Components/StartingMenu";
@@ -19,7 +23,7 @@ const Page = () => {
       <Routes>
         <Route index element={<StartingPage />} />
         <Route path="story" element={<StoryPage />} />
-
+        <Route path="option" element={<OptionPage />} />
         <Route path="quiz" element={<QuizPage />} />
       </Routes>
     </S.Container>
@@ -43,6 +47,16 @@ const LoadingPage = () => {
   );
 };
 
+const OptionPage = () => {
+  return (
+    <S.ContainerOption>
+      <StoryCard />
+      <StoryOptionForm />
+      <PageFlippers />
+    </S.ContainerOption>
+  );
+};
+
 const QuizPage = () => {
   return (
     <S.ContainerQuiz>
@@ -54,16 +68,18 @@ const QuizPage = () => {
 };
 
 const StoryPage = () => {
-  const [story, setStory] = useRecoilState(StoryState);
+  const story = useRecoilValue(CurrentStoryState);
+  const [nextAction, setNextAction] = useRecoilState(NextActionState);
 
   useEffect(() => {
-    // example();
+    console.log(story.image_url[0]);
+    setNextAction({ PageType: OPTIONPAGE });
   }, []);
 
   return (
     <S.ContainerStory>
-      <StoryImage />
-      <StoryTexts />
+      <StoryImage storyImage={story.image_url} />
+      <StoryTexts storyText={story.text} />
       <PageFlippers />
     </S.ContainerStory>
   );

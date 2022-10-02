@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const StoryImage = () => {
+export const StoryImage = ({ storyImage }) => {
   return (
     <Container>
-      <Image src={require("../../Assets/iex1.png")} />
+      <Image src={storyImage} />
     </Container>
   );
 };
