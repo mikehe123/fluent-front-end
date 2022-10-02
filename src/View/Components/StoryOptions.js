@@ -72,16 +72,21 @@ const OptionContainer = styled.div`
   margin-top: 28px;
   width: 419px;
   height: 80px;
-
+  box-shadow: ${(props) => (props.selected ? "" : "0px 7px 0px #eaeaea")};
   background-color: ${(props) => (props.selected ? "#ddf4ff" : "#ffffff")};
   border: ${(props) =>
     props.selected ? "3px solid #1899d6;" : "3px solid #eaeaea"};
-  box-shadow: ${(props) =>
-    props.selected ? "#0px 4px 0px #1899d6" : "#0px 4px 0px #eaeaea"};
+  /* box-shadow: ${(props) =>
+    props.selected ? "#0px 4px 0px #1899d6" : "#0px 4px 0px #eaeaea"}; */
   border-radius: 10px;
 
   display: flex;
   align-items: center;
+  :active {
+    transform: translate(0, 2px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 2px 0px #eaeaea;
+  }
 `;
 
 const OptionSelectBox = styled.div`

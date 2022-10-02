@@ -142,25 +142,34 @@ const Container = styled.div`
   right: 60px;
   bottom: 40px;
   display: flex;
-  width: 77px;
-  height: 77px;
-  border: 2px solid #e0e0e0;
+  width: 70px;
+  height: 70px;
+  /* border: 2px solid #e0e0e0; */
   border-radius: 100px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   justify-content: space-around;
 `;
 
 const ContainerButton = styled.div`
-  width: 47.69px;
-  height: 47.69px;
+  width: 60.69px;
+  height: 60.69px;
   left: 1070.33px;
   top: 726.29px;
   border-radius: 999px;
 
   background: #fedd67;
-  box-shadow: 0px 4px 0px #d9a900;
+  box-shadow: 0px 6px 0px #d9a900;
   display: flex;
   align-items: center;
   justify-content: center;
+  svg {
+    transform: scale(1.3);
+  }
+  :active {
+    transform: translate(0, 2px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 2px 0px #d9a900;
+  }
 `;
