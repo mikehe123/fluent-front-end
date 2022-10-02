@@ -88,7 +88,7 @@ const QuizPage = () => {
 const StoryPage = () => {
   const story = useRecoilValue(CurrentStoryState);
   const [nextAction, setNextAction] = useRecoilState(NextActionState);
-  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
+  // const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
   const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
 
   useEffect(() => {
@@ -100,9 +100,9 @@ const StoryPage = () => {
       setNextAction({ PageType: OPTIONPAGE });
     }
 
-    setHistoryStory([...newHistory]);
+    // setHistoryStory([...newHistory]);
     console.log("for history");
-    console.log(historyStory);
+    // console.log(historyStory);
   }, []);
 
   return (

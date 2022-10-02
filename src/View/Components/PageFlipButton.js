@@ -49,24 +49,6 @@ export const NextPageButton = () => {
       return;
     }
 
-    if (currentStory.story_part_id == historyStory.length - 1) {
-      console.log(
-        "update the newest part",
-        currentStory.story_part_id,
-        historyStory.length - 1
-      );
-      setStoryPart(historyStory.length);
-    } else {
-      // console.log(
-      //   "not update newest part",
-      //   currentStory.story_part_id,
-      //   historyStory.length - 1
-      // );
-      setCurrentStory({ ...historyStory[storyPart] });
-
-      setStoryPart(storyPart + 1);
-    }
-
     switch (nextAction.PageType) {
       case STORYPAGE:
         setLoading(true);
