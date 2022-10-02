@@ -86,9 +86,7 @@ export const BackPageButton = () => {
 
   console.log(historyStory);
   const handleClick = () => {
-    if (historyStory.length > 0) {
-      setCurrentStory(historyStory[historyStory.length - 1]);
-    }
+    // setCurrentStory(historyStory[historyStory.length - 1]);
   };
   return (
     <ContainerButton onClick={handleClick}>

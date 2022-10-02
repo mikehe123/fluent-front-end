@@ -41,7 +41,7 @@ export const QuizOptionForm = () => {
     if (parseInt(option_id) === quiz.answer_id) {
       setresponseMessage("Hooray!!!! You got it right!");
     } else {
-      setresponseMessage("You fucked up dawg");
+      setresponseMessage("Incorrect");
     }
   };
 

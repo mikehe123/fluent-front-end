@@ -72,7 +72,7 @@ const QuizPage = () => {
   return (
     <S.ContainerQuiz>
       <StoryCard />
-      {/* <QuizOptionForm /> */}
+      <QuizOptionForm />
       <PageFlippers />
     </S.ContainerQuiz>
   );
