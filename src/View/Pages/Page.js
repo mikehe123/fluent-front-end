@@ -58,6 +58,7 @@ const OptionPage = () => {
   return (
     <S.ContainerOption>
       <StoryCard />
+      <S.VeritcalSpacer />
       <StoryOptionForm />
       <PageFlippers />
     </S.ContainerOption>
@@ -79,6 +80,7 @@ const QuizPage = () => {
   return (
     <S.ContainerQuiz>
       <StoryCard />
+      <S.VeritcalSpacer />
       <QuizOptionForm />
       <PageFlippers />
     </S.ContainerQuiz>
