@@ -40,6 +40,11 @@ export const NextActionState = atom({
   default: NextActionDefault,
 });
 
+export const LoadingState = atom({
+  key: "LoadingStateAtom",
+  default: false,
+});
+
 const CurrentStory = {
   id: 1,
   idPart: 0,

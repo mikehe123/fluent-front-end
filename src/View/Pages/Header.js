@@ -13,6 +13,7 @@ const Container = styled.div`
   align-items: center;
   padding: 28px 0 28px 88px;
   border-bottom: 3px solid #e1e1e1;
+  z-index: 1000;
 `;
 
 const BrandName = styled.div`
