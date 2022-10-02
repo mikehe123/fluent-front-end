@@ -47,11 +47,13 @@ export const QuizOptionForm = () => {
 
   return (
     <Container>
-      <StoryOptionQuestion>{quiz.question}</StoryOptionQuestion>
-      <StoryOptionWrapper>
-        {generate_option_cards()}
-        {responseMessage && <QuizResponse>{responseMessage}</QuizResponse>}
-      </StoryOptionWrapper>
+      <ContainerForm>
+        <StoryOptionQuestion>{quiz.question}</StoryOptionQuestion>
+        <StoryOptionWrapper>
+          {generate_option_cards()}
+          {responseMessage && <QuizResponse>{responseMessage}</QuizResponse>}
+        </StoryOptionWrapper>
+      </ContainerForm>
     </Container>
   );
 };
@@ -83,25 +85,30 @@ export const StoryOption = (props) => {
   );
 };
 
+const ContainerForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-content: center;
-
-  /* width: 50vw; */
+  align-items: center;
+  /* justify-content: center; */
+  width: 50vw;
 `;
 
 const StoryOptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
+  /* align-items: start; */
 `;
 const OptionContainer = styled.div`
   margin-top: 28px;
   min-width: 160px;
   max-width: 400px;
   min-height: 60px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 
   background: #ffffff;
   border: 3px solid #eaeaea;
@@ -188,7 +195,7 @@ const StoryOptionQuestion = styled.div`
 
   color: #6f6f6f;
 
-  margin: 20px 0 20px 0;
+  margin: 0 0 20px 0;
 `;
 
 const QuizResponse = styled.div`

@@ -10,17 +10,21 @@ export const Container = styled.div`
 export const ContainerQuiz = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
-  padding-top: 60px;
+  justify-content: space-between;
+  padding: 60px 160px 0 160px;
 `;
 
-export const VeritcalSpacer = styled.div``;
+export const VeritcalSpacer = styled.div`
+  height: 100%;
+  width: 3px;
+  background-color: #eaeaea;
+`;
 
 export const ContainerOption = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
-  padding-top: 60px;
+  justify-content: space-between;
+  padding: 60px 160px 0 160px;
 `;
 
 export const ContainerLoading = styled.div`
