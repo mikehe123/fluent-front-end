@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { LoadingState, CurrentStoryState } from "../../Model/Story.ts";
+import {
+  LoadingState,
+  CurrentStoryState,
+  StoryHistoryState,
+} from "../../Model/Story.ts";
 import { Loading } from "./Loading";
 import InitPrompt from "../../Controllers/InitPrompt";
 
@@ -26,18 +30,22 @@ const Level = ({ experience }) => {
   const [loading, setLoading] = useRecoilState(LoadingState);
   const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
 
+  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
   const handleClick = async () => {
     setLoading(true);
     const initalResponse = await InitPrompt("2nd grade");
     if (initalResponse) {
       setCurrentStory(initalResponse);
-
+      setHistoryStory([...historyStory, initalResponse]);
       setLoading(false);
       // console.log(initalResponse);
       navigate("story");
       // console.log("startingpage init success", initalResponse);
     }
   };
+
+  console.log(historyStory, "histroy from staring page");
+  // console.log("new history", currentStory);
 
   return <LevelContainer onClick={handleClick}>{experience}</LevelContainer>;
 };

@@ -9,6 +9,7 @@ import {
   LoadingState,
   CurrentStoryState,
   StoryHistoryState,
+  OldStoryState,
 } from "../../Model/Story.ts";
 import ContinPrompt from "../../Controllers/ContinPrompt";
 
@@ -40,6 +41,8 @@ export const NextPageButton = () => {
 
         if (storyContinue) {
           setHistoryStory([...historyStory, currentStory]);
+          console.log("for history");
+          console.log(historyStory);
           setCurrentStory(storyContinue);
           setLoading(false);
           navigate("../story");
@@ -77,8 +80,18 @@ export const NextPageButton = () => {
 };
 
 export const BackPageButton = () => {
+  const [historyStory, setHistoryStory] = useRecoilState(StoryHistoryState);
+  // const [oldStory, setOldStory] = useRecoilState(OldStoryState);
+  const [currentStory, setCurrentStory] = useRecoilState(CurrentStoryState);
+
+  console.log(historyStory);
+  const handleClick = () => {
+    if (historyStory.length > 0) {
+      setCurrentStory(historyStory[historyStory.length - 1]);
+    }
+  };
   return (
-    <ContainerButton>
+    <ContainerButton onClick={handleClick}>
       <svg
         width="20"
         height="18"

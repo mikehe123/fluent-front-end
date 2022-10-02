@@ -5,9 +5,11 @@ import {
   CurrentStoryState,
   NextActionState,
   OPTIONPAGE,
+  QUIZPAGE,
 } from "../../Model/Story.ts";
 import { Loading } from "../Components/Loading";
 import { PageFlippers } from "../Components/PageFlipButton";
+import { QuizOptionForm } from "../Components/QuizOptions";
 import { StartingMenu } from "../Components/StartingMenu";
 import { StoryCard } from "../Components/StoryCard";
 import { StoryImage } from "../Components/StoryImage";
@@ -58,10 +60,19 @@ const OptionPage = () => {
 };
 
 const QuizPage = () => {
+  const story = useRecoilValue(CurrentStoryState);
+  console.log(story);
+
+  const [nextAction, setNextAction] = useRecoilState(NextActionState);
+
+  useEffect(() => {
+    setNextAction({ PageType: OPTIONPAGE });
+  }, []);
+
   return (
     <S.ContainerQuiz>
       <StoryCard />
-      <StoryOptionForm />
+      {/* <QuizOptionForm /> */}
       <PageFlippers />
     </S.ContainerQuiz>
   );
@@ -72,8 +83,11 @@ const StoryPage = () => {
   const [nextAction, setNextAction] = useRecoilState(NextActionState);
 
   useEffect(() => {
-    console.log(story.image_url[0]);
-    setNextAction({ PageType: OPTIONPAGE });
+    if (story.hasOwnProperty("quiz")) {
+      setNextAction({ PageType: QUIZPAGE });
+    } else {
+      setNextAction({ PageType: OPTIONPAGE });
+    }
   }, []);
 
   return (

@@ -27,6 +27,7 @@ type StoryResponseType = {
   };
   selected_option_id: Number | null;
   story_id: Number;
+  quiz?: any;
 };
 
 const StoryResponseDefault: StoryResponseType = {
@@ -61,9 +62,7 @@ export const StoryHistoryState = atom({
   default: [],
 });
 
-const CurrentStory = {
-  id: 1,
-  idPart: 0,
-  text: "",
-  nextOptions: [],
-};
+export const OldStoryState = atom({
+  key: "OldStoryStateAtom",
+  default: {},
+});

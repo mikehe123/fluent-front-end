@@ -1,50 +1,48 @@
 import styled from "styled-components";
-import {useState} from 'react';
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { CurrentStoryState } from "../../Model/Story.ts";
 
 export const QuizOptionForm = () => {
-  const [selectedResponse, setSelectedResponse] = useState(null)
-  const [responseMessage, setresponseMessage] = useState(null)
-  const quiz = {
-      "question": "What does Joe see?",
-      "options": {
-          "0": "A duck",
-          "1": "A bear",
-          "2": "A rabbit",
-          "3": "A deer"
-      },
-      "answer_id": 1,
-      "story_part_id": 1
-  }
+  const [selectedResponse, setSelectedResponse] = useState(null);
+  const [responseMessage, setresponseMessage] = useState(null);
+  const story = useRecoilState(CurrentStoryState);
+  const quiz = story.quiz;
+  console.log(quiz);
 
   const generate_option_cards = () => {
-    let optionCards = []
-    for(let index in quiz.options) {
-      let indexInt = parseInt(index)
+    let optionCards = [];
+    for (let index in quiz.options) {
+      let indexInt = parseInt(index);
       optionCards.push(
-        <StoryOption 
-          correctResponse={selectedResponse != null && indexInt===quiz.answer_id}
-          incorrectResponse={selectedResponse === indexInt && indexInt!==quiz.answer_id}
-          id={index} 
-          optionText={quiz.options[index]} 
+        <StoryOption
+          key={index}
+          correctResponse={
+            selectedResponse != null && indexInt === quiz.answer_id
+          }
+          incorrectResponse={
+            selectedResponse === indexInt && indexInt !== quiz.answer_id
+          }
+          id={index}
+          optionText={quiz.options[index]}
           selectQuizOption={selectQuizOption}
         />
       );
     }
-    return optionCards
-  }
+    return optionCards;
+  };
 
   const selectQuizOption = (option_id) => {
     if (selectedResponse !== null) {
-      return
+      return;
     }
     setSelectedResponse(parseInt(option_id));
     if (parseInt(option_id) === quiz.answer_id) {
-      setresponseMessage("Hooray!!!! You got it right!")
+      setresponseMessage("Hooray!!!! You got it right!");
     } else {
-      setresponseMessage("You fucked up dawg")
-
+      setresponseMessage("You fucked up dawg");
     }
-  }
+  };
 
   return (
     <Container>
@@ -53,14 +51,29 @@ export const QuizOptionForm = () => {
       {responseMessage && <QuizResponse>{responseMessage}</QuizResponse>}
     </Container>
   );
-
 };
 
 export const StoryOption = (props) => {
   return (
-    <OptionContainer correctResponse={props.correctResponse} incorrectResponse={props.incorrectResponse} onClick={() => {props.selectQuizOption(props.id)}}>
-      <OptionSelectBox correctResponse={props.correctResponse} incorrectResponse={props.incorrectResponse}>{parseInt(props.id) + 1}</OptionSelectBox>
-      <OptionText correctResponse={props.correctResponse} incorrectResponse={props.incorrectResponse}>{props.optionText}</OptionText>
+    <OptionContainer
+      correctResponse={props.correctResponse}
+      incorrectResponse={props.incorrectResponse}
+      onClick={() => {
+        props.selectQuizOption(props.id);
+      }}
+    >
+      <OptionSelectBox
+        correctResponse={props.correctResponse}
+        incorrectResponse={props.incorrectResponse}
+      >
+        {parseInt(props.id) + 1}
+      </OptionSelectBox>
+      <OptionText
+        correctResponse={props.correctResponse}
+        incorrectResponse={props.incorrectResponse}
+      >
+        {props.optionText}
+      </OptionText>
     </OptionContainer>
   );
 };
@@ -83,13 +96,17 @@ const OptionContainer = styled.div`
   display: flex;
   align-items: center;
 
-  ${({ correctResponse }) => correctResponse && `
+  ${({ correctResponse }) =>
+    correctResponse &&
+    `
     background: #D9FFD2;
     border: 3px solid #78C86B;
     box-shadow: 0px 4px 0px #78C86B;
   `}
 
-  ${({ incorrectResponse }) => incorrectResponse && `
+  ${({ incorrectResponse }) =>
+    incorrectResponse &&
+    `
     background: #FFE5E5;
     border: 3px solid #FF9494;
     box-shadow: 0px 4px 0px #FF9494;
@@ -109,12 +126,16 @@ const OptionSelectBox = styled.div`
   justify-content: center;
   color: #eaeaea;
 
-  ${({ correctResponse }) => correctResponse && `
+  ${({ correctResponse }) =>
+    correctResponse &&
+    `
     border: 3px solid #78C86B;
     color: #78C86B;
   `}
 
-  ${({ incorrectResponse }) => incorrectResponse && `
+  ${({ incorrectResponse }) =>
+    incorrectResponse &&
+    `
     border: 3px solid #FF9494;
     color: #FF9494;
   `}
@@ -128,11 +149,15 @@ const OptionText = styled.div`
   line-height: 19px;
   color: #606060;
 
-  ${({ correctResponse }) => correctResponse && `
+  ${({ correctResponse }) =>
+    correctResponse &&
+    `
     color: #78C86B;
   `}
 
-  ${({ incorrectResponse }) => incorrectResponse && `
+  ${({ incorrectResponse }) =>
+    incorrectResponse &&
+    `
     color: #FF9494;
   `}
 `;
