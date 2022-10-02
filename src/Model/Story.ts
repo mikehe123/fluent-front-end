@@ -30,7 +30,7 @@ type StoryResponseType = {
   quiz?: any;
 };
 
-const StoryResponseDefault: StoryResponseType = {
+export const StoryResponseDefault: StoryResponseType = {
   story_part_id: null,
   text: "",
   image_url: [""],

@@ -150,6 +150,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   justify-content: space-around;
+  cursor: pointer;
 `;
 
 const ContainerButton = styled.div`

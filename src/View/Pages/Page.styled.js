@@ -12,6 +12,7 @@ export const ContainerQuiz = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 60px 160px 0 160px;
+  user-select: none;
 `;
 
 export const VeritcalSpacer = styled.div`
@@ -25,6 +26,7 @@ export const ContainerOption = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 60px 160px 0 160px;
+  user-select: none;
 `;
 
 export const ContainerLoading = styled.div`
@@ -32,6 +34,7 @@ export const ContainerLoading = styled.div`
   align-items: flex-start;
   justify-content: space-around;
   padding: 120px 120px 0 120px;
+  user-select: none;
 `;
 
 export const ContainerStory = styled.div`

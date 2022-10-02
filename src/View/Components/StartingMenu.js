@@ -20,9 +20,16 @@ export const StartingMenu = () => {
   return (
     <Container>
       <HeroContainer>
-        <StartHero><Infinity>∞</Infinity> Stories.</StartHero>
-        <StartHero><Infinity>∞</Infinity> Learning.</StartHero>
-        <StartHeroSub>Fluent helps you improve your english comprehension through stories and quizes personalized with AI.</StartHeroSub>
+        <StartHero>
+          <Infinity>∞</Infinity> Stories.
+        </StartHero>
+        <StartHero>
+          <Infinity>∞</Infinity> Learning.
+        </StartHero>
+        <StartHeroSub>
+          Fluent helps you improve your English comprehension through stories
+          and quizes personalized with AI.
+        </StartHeroSub>
       </HeroContainer>
       <ActionContainer>
         <StartHeader>Write a story about...</StartHeader>
@@ -78,33 +85,29 @@ const StartForm = ({ experience }) => {
 };
 
 const Container = styled.div`
-  display:flex;
-
+  display: flex;
 `;
-
 
 const ActionContainer = styled.div`
   font-family: "Public Sans";
   font-style: normal;
   font-size: 20px;
-  text-align:left;
+  text-align: left;
   color: #6f6f6f;
-  margin-top:20px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  align-items;
   flex-direction: column;
-  `;
+`;
 
 const StartHeroSub = styled.div`
   font-family: "Public Sans";
   font-style: normal;
   font-size: 20px;
-  text-align:left;
+  text-align: left;
   color: #808080;
-  margin-top:20px;
-  `;
-
+  margin-top: 20px;
+`;
 
 const StartHero = styled.div`
   color: #6f6f6f;
@@ -112,20 +115,20 @@ const StartHero = styled.div`
   font-style: normal;
   font-weight: 700;
   font-size: 90px;
-  text-align:left;
-  margin-bottom:20px;
+  text-align: left;
+  margin-bottom: 20px;
   width: 500px;
-  `;
+`;
 
 const HeroContainer = styled.div`
   border-right: 2px solid #d2d2d2;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-text:left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-text: left;
   padding-right: 40px;
-  margin-right:40px;
-  height: 400px
+  margin-right: 40px;
+  height: 400px;
 `;
 
 const StartHeader = styled.div`
@@ -147,6 +150,8 @@ const Infinity = styled.div`
 const StartButton = styled.button`
   background: #fec807;
   box-shadow: 0px 4px 0px #d9a900;
+  cursor: pointer;
+
   border-radius: 10px;
   width: 200px;
   height: 50px;
@@ -155,8 +160,11 @@ const StartButton = styled.button`
   color: white;
   font-weight: 700;
   font-size: 15px;
-  &:hover {
-    box-shadow: none !important;
+
+  :active {
+    transform: translate(0, 2px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 2px 0px #d9a900;
   }
 `;
 

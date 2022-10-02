@@ -51,7 +51,15 @@ export const QuizOptionForm = () => {
         <StoryOptionQuestion>{quiz.question}</StoryOptionQuestion>
         <StoryOptionWrapper>
           {generate_option_cards()}
-          {responseMessage && <QuizResponse>{responseMessage}</QuizResponse>}
+          {responseMessage && (
+            <QuizResponse
+              responseMessage={
+                "Hooray!!!! You got it right!" === responseMessage
+              }
+            >
+              {responseMessage}
+            </QuizResponse>
+          )}
         </StoryOptionWrapper>
       </ContainerForm>
     </Container>
@@ -104,6 +112,7 @@ const StoryOptionWrapper = styled.div`
   /* align-items: start; */
 `;
 const OptionContainer = styled.div`
+  cursor: pointer;
   margin-top: 28px;
   min-width: 160px;
   max-width: 400px;
@@ -117,6 +126,12 @@ const OptionContainer = styled.div`
 
   display: flex;
   align-items: center;
+
+  :active {
+    transform: translate(0, 2px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 2px 0px #eaeaea;
+  }
 
   ${({ correctResponse }) =>
     correctResponse &&
@@ -204,7 +219,8 @@ const QuizResponse = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 38px;
-  color: #6f6f6f;
+  /* color: #; */
+  color: ${(props) => (props.responseMessage ? "#78c86b" : "#ff9494")};
   margin: 20px 0 20px 0;
 `;
 

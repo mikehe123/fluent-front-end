@@ -1,9 +1,22 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { LoadingState } from "../../Model/Story.ts";
 
 export const PageHeader = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useRecoilState(LoadingState);
+
   return (
     <Container>
-      <BrandName>fluent</BrandName>
+      <BrandName
+        onClick={() => {
+          setLoading(false);
+          navigate("../");
+        }}
+      >
+        fluent
+      </BrandName>
     </Container>
   );
 };
@@ -24,4 +37,5 @@ const BrandName = styled.div`
   font-size: 30px;
   line-height: 37px;
   color: #ffd027;
+  user-select: none;
 `;

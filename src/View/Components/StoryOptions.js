@@ -70,10 +70,11 @@ const Container = styled.div`
 `;
 
 const OptionContainer = styled.div`
+  cursor: pointer;
   margin-top: 28px;
   width: 419px;
-  height: 80px;
-  box-shadow: ${(props) => (props.selected ? "" : "0px 7px 0px #eaeaea")};
+  min-height: 80px;
+  box-shadow: ${(props) => (props.selected ? "" : "0px 6px 0px #eaeaea")};
   background-color: ${(props) => (props.selected ? "#ddf4ff" : "#ffffff")};
   border: ${(props) =>
     props.selected ? "3px solid #1899d6;" : "3px solid #eaeaea"};
@@ -112,7 +113,8 @@ const OptionTextSelected = styled.div`
 `;
 
 const OptionText = styled.div`
-  padding-right: 20px;
+  margin: 15px 10px 15px 0;
+
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 500;
