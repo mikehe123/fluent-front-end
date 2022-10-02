@@ -19,8 +19,16 @@ export const StartingMenu = () => {
 
   return (
     <Container>
-      <StartHeader>Write a story about...</StartHeader>
-      <StartForm />
+      <HeroContainer>
+        <StartHero><Infinity>∞</Infinity> Stories.</StartHero>
+        <StartHero><Infinity>∞</Infinity> Learning.</StartHero>
+        <StartHeroSub>Fluent helps you improve your english comprehension through stories and quizes personalized with AI.</StartHeroSub>
+      </HeroContainer>
+      <ActionContainer>
+        <StartHeader>Write a story about...</StartHeader>
+        <StartForm />
+      </ActionContainer>
+
       {/* <Level experience={"Beginner"} />
       <Level experience={"Intermmediate"} />
       <Level experience={"Hard"} /> */}
@@ -69,14 +77,71 @@ const StartForm = ({ experience }) => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  display:flex;
+
+`;
+
+
+const ActionContainer = styled.div`
+  font-family: "Public Sans";
+  font-style: normal;
+  font-size: 20px;
+  text-align:left;
+  color: #6f6f6f;
+  margin-top:20px;
+  display: flex;
+  justify-content: center;
+  align-items;
+  flex-direction: column;
+  `;
+
+const StartHeroSub = styled.div`
+  font-family: "Public Sans";
+  font-style: normal;
+  font-size: 20px;
+  text-align:left;
+  color: #808080;
+  margin-top:20px;
+  `;
+
+
+const StartHero = styled.div`
+  color: #6f6f6f;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 90px;
+  text-align:left;
+  margin-bottom:20px;
+  width: 500px;
+  `;
+
+const HeroContainer = styled.div`
+  border-right: 2px solid #d2d2d2;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-text:left;
+  padding-right: 40px;
+  margin-right:40px;
+  height: 400px
+`;
 
 const StartHeader = styled.div`
   color: #6f6f6f;
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 30px;
+`;
+
+const Infinity = styled.div`
+  color: #fec807;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  display: inline-block;
 `;
 
 const StartButton = styled.button`
@@ -136,7 +201,5 @@ const LevelContainer = styled.div`
 
 const StartInputContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 25px;
 `;
