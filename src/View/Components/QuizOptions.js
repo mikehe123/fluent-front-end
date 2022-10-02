@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { CurrentStoryState } from "../../Model/Story.ts";
 
 export const QuizOptionForm = () => {
   const [selectedResponse, setSelectedResponse] = useState(null);
   const [responseMessage, setresponseMessage] = useState(null);
-  const story = useRecoilState(CurrentStoryState);
+  const story = useRecoilValue(CurrentStoryState);
   const quiz = story.quiz;
+
   console.log(quiz);
 
   const generate_option_cards = () => {
